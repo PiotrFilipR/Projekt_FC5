@@ -8,10 +8,6 @@ szkola = {
 
 class Uczen:
 
-    imie = ""
-    nazwisko = ""
-    klasa = ""
-
     def __init__(self, imie, nazwisko, klasa):
         self.imie = imie
         self.nazwisko = nazwisko
@@ -19,11 +15,6 @@ class Uczen:
 
 
 class Nauczyciel:
-
-    imie = ""
-    nazwisko = ""
-    przedmiot = ""
-    klasy = []
 
     def __init__(self, imie, nazwisko, przedmiot, klasy):
         self.imie = imie
@@ -33,9 +24,6 @@ class Nauczyciel:
 
 
 class Wychowawca:
-    imie = ""
-    nazwisko = ""
-    klasa = ""
 
     def __init__(self, imie, nazwisko, klasa):
         self.imie = imie
@@ -130,16 +118,12 @@ while True:
             print("Podaj nazwisko ucznia: ")
             nazwisko_ucznia = input()
 
-            # for uczen in szkola["uczniowie"]:
-            #     if uczen.imie == imie_ucznia and uczen.nazwisko == nazwisko_ucznia:
-            #         for klasa in szkola["nauczyciele"]:
-            #             if uczen.klasa == klasa:
-            #                 print(f"Przedmioty ucznia {imie_ucznia} {nazwisko_ucznia}: ")
-            #                 print(Nauczyciel.przedmiot)
-
-                    # if uczen.klasa == Nauczyciel.klasy:
-                    #     for klasa in Nauczyciel.klasy:
-                    #         print(Nauczyciel.przedmiot)
+            for uczen in szkola["uczniowie"]:
+                if uczen.imie == imie_ucznia and uczen.nazwisko == nazwisko_ucznia:
+                    for nauczyciel in szkola["nauczyciele"]:
+                        if uczen.klasa in nauczyciel.klasy:
+                            print(f"Przedmioty ucznia {imie_ucznia} {nazwisko_ucznia}: ")
+                            print(f"{nauczyciel.przedmiot}, prowadzony przez {nauczyciel.imie} {nauczyciel.nazwisko}")
 
         elif wybor_zarzadzaj == "3":
             print("Podaj imię nauczyciela: ")
@@ -160,6 +144,11 @@ while True:
             for wychowawca in szkola["wychowawcy"]:
                 if wychowawca.imie == imie_wychowawcy and wychowawca.nazwisko == nazwisko_wychowawcy:
                     print(f"{imie_wychowawcy} {nazwisko_wychowawcy} jest wcyhowawcą klasy {wychowawca.klasa}")
+                    print("Uczniowie klasy: ")
+                    klasa = wychowawca.klasa
+                    for uczen in szkola['uczniowie']:
+                        if uczen.klasa == klasa:
+                            print(f"{uczen.imie} {uczen.nazwisko}")
                 else:
                     print("Podano złe imię i nazwisko")
 
